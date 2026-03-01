@@ -1,0 +1,183 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  color: rgb(110, 110, 110);
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+.sidebar {
+  background-color: rgb(244, 244, 244);
+  height: 100%;
+  width: 20%;
+  font-size: 2em;
+  margin: 30px 0px;
+}
+
+a {
+  color: rgb(110, 110, 110);
+  display: flex;
+  justify-content: center;
+  padding: 0.1em;
+}
+
+.card-container {
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 80%;
+  margin: 33px 30px;
+}
+
+.grass {
+  background-color: mediumseagreen;
+}
+
+.poison {
+  background-color: mediumpurple;
+}
+
+.fire {
+  background-color: goldenrod;
+}
+
+.flying {
+  background-color: steelblue;
+}
+
+.water {
+  background-color: dodgerblue;
+}
+
+.bug {
+  background-color: brown;
+}
+
+.normal {
+  background-color: gray;
+}
+
+.ground {
+  background-color: peru;
+}
+
+.fairy {
+  background-color: hotpink;
+}
+
+.fighting {
+  background-color: crimson;
+}
+
+.electric {
+  background-color: hsl(51deg 73% 50%);
+}
+
+.psychic {
+  background-color: orange;
+}
+
+.rock {
+  background-color: dimgray;
+}
+
+.ice {
+  background-color: darkcyan;
+}
+
+.dragon {
+  background-color: mediumaquamarine;
+}
+
+.ghost {
+  background-color: black;
+}
+
+.dark {
+  background-color: slategray;
+}
+
+.steel {
+  background-color: steelblue;
+}
+
+.all {
+  background-color: dimgray;
+}
+
+.card {
+  width: 320px;
+  border: 2px solid rgb(183, 183, 183);
+  padding: 10px;
+  background-color: rgb(244, 244, 244);
+  border-radius: 0.5em;
+  text-transform: capitalize;
+}
+
+.image{
+  width: 100%;
+  height: 200px;
+  background-color: rgba(230, 230, 230);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.overview {
+  display:  flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.6em 0em;
+}
+
+.type-container {
+  display: flex;
+  color: white;
+}
+
+table {
+  width: 100%;
+}
+
+tr {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid rgb(211, 211, 211);
+  font-weight: 700;
+  padding: 0.2em 0em;
+}
+
+table tr:last-child {
+  border-bottom: none;
+}
+
+table tr td:last-child {
+  font-weight: 400;
+}
+
+.name {
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+.type {
+  padding: 0.3em;
+  border-radius: 4px;
+  margin-left: 0.3em;
+}
