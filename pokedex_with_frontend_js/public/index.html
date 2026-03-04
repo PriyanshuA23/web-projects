@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="colors.css">
-  <script type="module" src="./pokemon_script.js"></script>
+  <script type="module" src="./script.js"></script>
 </head>
 
 <body>
@@ -20,8 +20,8 @@
 <!-- 
   <h1>Pokemon Gallery</h1>
   <form action="/pokemon" method="get" class="search-bar">
-    <input list="options" type="text" id="search-bar" placeholder="enter pokemon name" name="name">
-    <datalist id="options">
+    <input list="options" type="text" placeholder="enter pokemon name" name="name">
+    <daqtalist id="options">
       <% it.allPokemons.forEach(({name}) => {%>
       <option value="<%= name %>"></option>
       <% }) %>
@@ -51,36 +51,4 @@
       <option value="water">water</option>
     </select>
   </form>
-</header> --> -->
-
-<!-- <main class="container">
-    <% it.pokemons.forEach(({stats, name, types, url}) => { %>
-      <div class="card" <% if(it.length === 1) {%>
-         style="height: 500px;" <% }%> >
-          <div class="image">
-            <img src=<%= url %>
-              alt="pokemon">
-          </div>
-          <div class="details">
-            <div class="overview">
-              <div class="name"><%= name %></div>
-              <div class="type-container">
-                <% types.forEach((type) => {%>
-                <div class="type <%= type %>"><%= type %></div>
-                <% }) %>
-              </div>
-            </div>
-            <table>
-              <tbody>
-                <% stats.forEach(({base_stat, name}) => {%>
-                <tr>
-                  <td><%= name %></td>
-                  <td><%= base_stat %></td>
-                </tr>
-                <% }) %>
-              </tbody>
-            </table>
-          </div>
-      </div>
-    <% }) %>
-</main> -->
+</header> -->

@@ -1,22 +1,11 @@
-const fetchPokemon = async () => fetch("/data/all_data.json").then(data => data.json());
+import { createFragment } from "./fragment.js";
 
-const createFragment = ([tag, attributes, ...content]) => {
-  const element = document.createElement(tag);
-  for (const [key, val] of Object.entries(attributes)) {
-    element.setAttribute(key, val);
-  }
-
-  if (content.length === 1 && typeof content[0] === "string"){
-    element.textContent = content;
-    return element;
-  }
-  const finalContent = content.map(createFragment);
-  element.append(...finalContent);
-  return element;
-}
+const fetchPokemon = async () => 
+  fetch("/data/all_data.json")
+  .then(data => data.json());
 
 const createCard = ({stats, name, types, url}) => {
-  const data = [
+  const cardformat = [
     "div", {class: "card"},
       ["div", {class: "image"}, ["img", {src: url}, ""]],
       ["div", {class: "details"}, 
@@ -36,17 +25,58 @@ const createCard = ({stats, name, types, url}) => {
       ],
   ];
 
-  return createFragment(data);
+  return createFragment(cardformat);
 }
 
 const createAllCard = (allPokemon) => {
-  console.log({allPokemon});
-  
   const main = document.querySelector("main");
   const allPokemonCard = allPokemon.map(createCard);
   main.append(...allPokemonCard);
 };
 
+const extractAllTypesName = (allPokemon) => {
+  const typeList = [];
+  allPokemon.forEach(({types}) => {
+    types.forEach(type => {
+      if(!typeList.includes(type)) typeList.push(type);
+    })
+  });
+  return typeList;
+}
+ 
+const createHeader = (allPokemon) => {
+  const allTypes = extractAllTypesName(allPokemon);
+  const headingFormat = ["h1", {}, "Pokemon Gallery"];
+  const searchBarFormat = [
+    "form", {class: "search-bar", method: "get"},
+      ["input", {
+        list: "options",
+        type: "text",
+        placeholder: "enter pokemon name",
+        name: "name"
+      }, ""],
+      ["dataList", {id: "options"}, 
+        ...allPokemon.map(({name}) => ["option", {value: name}, ""])
+      ],
+      ["button", {}, "search"]
+    ];
+
+  const typeFormat = [
+    "form", {class: "type-selector"}, 
+    ["select", {name: "type", onchange: "this.form.submit()"}, 
+      ["option", {}, "select type"],
+      ...allTypes.map(type => ["option", {value: type}, type])
+    ]
+  ];
+
+  const header = document.querySelector("header");
+  const heading = createFragment(headingFormat);
+  const searchBar = createFragment(searchBarFormat);
+  const typeSelector = createFragment(typeFormat);
+  header.append(heading, searchBar, typeSelector);
+}
+
 window.onload = () => {
   fetchPokemon().then(createAllCard);
+  fetchPokemon().then(createHeader);
 }
