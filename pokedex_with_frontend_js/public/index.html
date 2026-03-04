@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="module" src="/srcipt.js"></script>
+</head>
+
+<body>
+  <header></header>
+  <main class="container"></main>
+<!-- 
+    <h1>Pokemon Gallery</h1>
+    <form action="/pokemon" method="get" class="search-bar">
+      <input list="options" type="text" id="search-bar" placeholder="enter pokemon name" name="name">
+      <datalist id="options">
+        <% it.allPokemons.forEach(({name}) => {%>
+        <option value="<%= name %>"></option>
+        <% }) %>
+      </datalist>
+      <button type="submit">search</button>
+    </form>
+    <form action="/types" method="get">
+      <select name="type" onchange="this.form.submit()">
+        <option value="">Select Type</option>
+        <option value="bug">bug</option>
+        <option value="dark">dark</option>
+        <option value="dragon">dragon</option>
+        <option value="electric">electric</option>
+        <option value="fairy">fairy</option>
+        <option value="fighting">fighting</option>
+        <option value="fire">fire</option>
+        <option value="flying">flying</option>
+        <option value="ghost">ghost</option>
+        <option value="grass">grass</option>
+        <option value="ground">ground</option>
+        <option value="ice">ice</option>
+        <option value="normal">normal</option>
+        <option value="poison">poison</option>
+        <option value="psychic">psychic</option>
+        <option value="rock">rock</option>
+        <option value="steel">steel</option>
+        <option value="water">water</option>
+      </select>
+    </form>
+  </header> --> -->
+
+  <!-- <main class="container">
+      <% it.pokemons.forEach(({stats, name, types, url}) => { %>
+        <div class="card" <% if(it.length === 1) {%>
+           style="height: 500px;" <% }%> >
+            <div class="image">
+              <img src=<%= url %>
+                alt="pokemon">
+            </div>
+            <div class="details">
+              <div class="overview">
+                <div class="name"><%= name %></div>
+                <div class="type-container">
+                  <% types.forEach((type) => {%>
+                  <div class="type <%= type %>"><%= type %></div>
+                  <% }) %>
+                </div>
+              </div>
+              <table>
+                <tbody>
+                  <% stats.forEach(({base_stat, name}) => {%>
+                  <tr>
+                    <td><%= name %></td>
+                    <td><%= base_stat %></td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+        </div>
+      <% }) %>
+  </main> -->
+</body>
+
+</html>
