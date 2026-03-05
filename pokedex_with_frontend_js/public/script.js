@@ -1,13 +1,20 @@
 import { createFragment } from "./fragment.js";
 
 const fetchPokemon = async () =>
-  fetch("/data/all_data.json")
+  fetch("/data/object_data.json")
     .then((data) => data.json());
 
-const createCard = ({ stats, name, types, url }) => {
+const createCardAttributes = (totalPokemon) => {
+  if(totalPokemon === 1) {
+    return {class: "card", style: "height: 500px;"};
+  }
+  return {class: "card"};
+}
+
+const createCard = ({ stats, name, types, url }, totalPokemon) => {
   const cardformat = [
     "div",
-    { class: "card" },
+    createCardAttributes(totalPokemon),
     ["div", { class: "image" }, ["img", { src: url }, ""]],
     ["div", { class: "details" }, ["div", { class: "overview" }, ["div", {
       class: "name",
@@ -15,7 +22,7 @@ const createCard = ({ stats, name, types, url }) => {
       "div",
       { class: "type-container" },
       ...types.map(
-        (type) => ["div", { class: `${type.toLowerCase()} type` }, type]
+        (type) => ["div", { class: `${type.toLowerCase()} type` }, type],
       ),
     ]], ["table", {}, [
       "tbody",
@@ -31,7 +38,8 @@ const createCard = ({ stats, name, types, url }) => {
 
 const createAllCard = (allPokemon) => {
   const main = document.querySelector("main");
-  const allPokemonCard = allPokemon.map(createCard);
+  const totalPokemon = allPokemon.length;
+  const allPokemonCard = allPokemon.map(pokemon => createCard(pokemon, totalPokemon));
   main.append(...allPokemonCard);
 };
 
@@ -71,7 +79,7 @@ const createHeader = (allPokemon) => {
     [
       "select",
       { name: "type" },
-      ["option", {}, "select type"],
+      ["option", {value: "all"}, "all"],
       ...allTypes.map((type) => ["option", { value: type }, type]),
     ],
   ];
@@ -84,23 +92,46 @@ const createHeader = (allPokemon) => {
 };
 
 const createTypeCard = (type, allPokemon) => {
+  const pokemonContainer = document.querySelector(".container");
+  pokemonContainer.textContent = "";
+
+  if(type === "all") {
+    return createAllCard(allPokemon);
+  }
   const allSpecifiedTypePokemon = allPokemon.filter(({ types }) =>
     types.includes(type)
   );
+  createAllCard(allSpecifiedTypePokemon);
+};
+
+const createCardOfSpecifiedPokemon = (name, allPokemon) => {
   const pokemonContainer = document.querySelector(".container");
   pokemonContainer.textContent = "";
-  createAllCard(allSpecifiedTypePokemon)
-};
+  const pokemon = allPokemon[name];
+  createAllCard([pokemon])
+}
 
 window.onload = async () => {
   const allPokemon = await fetchPokemon();
-  createHeader(allPokemon);
-  createAllCard(allPokemon);
+  const arrayOfPokemon = Object.values(allPokemon);
+  createHeader(arrayOfPokemon);
+  createAllCard(arrayOfPokemon);
 
   const typeSelector = document.querySelector("select");
   typeSelector.addEventListener("change", (event) => {
     event.preventDefault();
     const selectedType = event.target.value;
-    createTypeCard(selectedType, allPokemon);
+    createTypeCard(selectedType, arrayOfPokemon);
   });
+
+  const searchBarContainer = document.querySelector(".search-bar");
+  const searchBar = searchBarContainer.querySelector("input");
+  const selectBox = document.querySelector("select");
+  searchBarContainer.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const pokemonName = searchBar.value;
+    createCardOfSpecifiedPokemon(pokemonName, allPokemon);
+    searchBar.value = "";
+    selectBox.value = "all";
+  })
 };
