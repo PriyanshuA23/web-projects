@@ -1,7 +1,6 @@
 export const serveHomePage = (context) => {
   const eta = context.get("eta");
   const pokemons = context.get("pokemons");
-  console.log(pokemons);
 
   const page = eta.render("/pokemon.html", { pokemons, allPokemons: pokemons });
   return context.html(page);
@@ -11,8 +10,13 @@ export const serveParticularTypePokemon = (context) => {
   const type = context.req.query("type");
   const eta = context.get("eta");
   const allPokemons = context.get("pokemons");
-  const pokemons = allPokemons.filter(({ types }) => types.includes(type));
-  const page = eta.render("/pokemon.html", { pokemons, allPokemons });
+  const specifiedPokemon = allPokemons.filter(({ types }) =>
+    types.includes(type)
+  );
+  const page = eta.render("/pokemon.html", {
+    pokemons: specifiedPokemon,
+    allPokemons,
+  });
   return context.html(page);
 };
 
